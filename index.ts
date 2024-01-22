@@ -69,6 +69,30 @@ export class vehicle {
 }
 
 export class Main {
+  static displayVehicleInfo(vehicle: vehicle): void {
+    const tax = vehicle.calculate();
+    console.log(
+      `${vehicle.getOwner()}\t\t${vehicle.getType()}\t\t${vehicle.getValue()}\t\t\t${vehicle.getCylinderCapacity()}\t\t\t${tax}`
+    );
+  }
+
+  static displayVehicleTable(vehicles: vehicle[]): void {
+    // Print table header
+    console.log("Bảng kê khai tiền thuế trước bạ:");
+    console.log(
+      "--------------------------------------------------------------------------------------------------"
+    );
+    console.log("Tên Chủ xe\t\tLoại xe\t\tDung tích\t\tGiá trị\t\tThuế phải nộp");
+    console.log(
+      "--------------------------------------------------------------------------------------------------"
+    );
+
+    // Loop through each vehicle and display its information
+    vehicles.forEach((vehicle) => {
+      this.displayVehicleInfo(vehicle); // Call displayVehicleInfo for each vehicle
+    });
+  }
+
   public static main(): void {
     const rl = createInterface({
       input: process.stdin,
@@ -105,30 +129,6 @@ export class Main {
         )
       );
     });
-  }
-
-  static displayVehicleTable(vehicles: vehicle[]): void {
-    // Print table header
-    console.log("Bảng kê khai tiền thuế trước bạ:");
-    console.log(
-      "--------------------------------------------------------------------------------------------------"
-    );
-    console.log("Tên Chủ xe\t\tLoại xe\t\tDung tích\t\tGiá trị\t\tThuế phải nộp");
-    console.log(
-      "--------------------------------------------------------------------------------------------------"
-    );
-
-    // Loop through each vehicle and display its information
-    vehicles.forEach((vehicle) => {
-      this.displayVehicleInfo(vehicle); // Call displayVehicleInfo for each vehicle
-    });
-  }
-
-  static displayVehicleInfo(vehicle: vehicle): void {
-    const tax = vehicle.calculate();
-    console.log(
-      `${vehicle.getOwner()}\t\t${vehicle.getType()}\t\t${vehicle.getValue()}\t\t\t${vehicle.getCylinderCapacity()}\t\t\t${tax}`
-    );
   }
 }
 Main.main();

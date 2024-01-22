@@ -83,9 +83,9 @@ export class Main {
       }
 
       const vehicles: vehicle[] = [];
-      for (let i = 0; i < numberOfVehicles; i++) {
+      vehicles.map((item, index) =>
         rl.question(
-          `Nhập thông tin xe thứ ${i + 1} (chủ xe, loại xe, giá trị, dung tích): `,
+          `Nhập thông tin xe thứ ${index + 1} (chủ xe, loại xe, giá trị, dung tích): `,
           (vehicleInfoStr) => {
             const [owner, type, valueStr, cylinderCapacityStr] = vehicleInfoStr.split(",");
             const value = Number(valueStr);
@@ -95,16 +95,15 @@ export class Main {
               vehicles.push(new vehicle(owner, type, value, cylinderCapacity));
             } catch (error) {
               console.error(error.message);
-              i--; // Decrement counter to repeat input for invalid vehicle
             }
 
-            if (i === numberOfVehicles - 1) {
+            if (index === numberOfVehicles - 1) {
               rl.close();
               this.displayVehicleTable(vehicles);
             }
           }
-        );
-      }
+        )
+      );
     });
   }
 
